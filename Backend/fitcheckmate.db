@@ -1,0 +1,29 @@
+const sqlite3 = require('sqlite3').verbose();
+
+// Open (or create) the database file
+const db = new sqlite3.Database('./fitcheckmate.db', (err) => {
+  if (err) {
+    console.error('Error opening database:', err.message);
+  } else {
+    console.log('Connected to the SQLite database.');
+  }
+});
+
+// Create tables if they don’t exist
+db.serialize(() => {
+  db.run(`CREATE TABLE IF NOT EXISTS colors (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    color_name TEXT NOT NULL,
+    hex_code TEXT NOT NULL
+  )`);
+
+  db.run(`CREATE TABLE IF NOT EXISTS images (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    image_url TEXT NOT NULL,
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  )`);
+});
+
+// Export the database connection
+module.exports = db;

@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "get-image-colors": "^4.0.1",
+    "html2canvas": "^1.4.1",
+    "sqlite3": "^5.1.7",
+    "stream-browserify": "^3.0.0",
+    "vibrant": "^0.0.1"
+  }
+}
