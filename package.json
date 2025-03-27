@@ -10,7 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.8.1",
     "bootstrap": "^5.3.3",
-    "firebase": "^11.4.0",
+    "firebase": "^11.5.0",
     "get-image-colors": "^4.0.1",
     "html2canvas": "^1.4.1",
     "react": "^19.0.0",
@@ -18,10 +18,10 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.3.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
     "sqlite3": "^5.1.7",
     "stream-browserify": "^3.0.0",
-    "vibrant": "^0.0.1"
+    "vibrant": "^0.0.1",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
