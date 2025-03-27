@@ -98,19 +98,10 @@ function UploadPage() {
 
   const handleFileChange = (event, setImage) => {
     const file = event.target.files[0];
-    const allowedTypes = ["image/jpeg", "image/png", "image/jpg"]; // Allowed MIME types
-  
     if (file) {
-      if (!allowedTypes.includes(file.type)) {
-        setError("Invalid file type. Please upload a JPG, JPEG or PNG image.");
-        return;
-      }
-  
-      setError(""); // Clear error if the file is valid
       setImage(file);
     }
   };
-  
 
   const navigate = useNavigate(); // Added navigate hook
   const handleAnalyze = async (event) => {
@@ -185,14 +176,9 @@ function UploadPage() {
                           <Card className="p-3" style={{ backgroundColor: "#1A1A40" }}>
                             <h3 style={{ color: "white" }}>Upload {category}</h3>
                             <label className="custom-file-upload">
-                                <input 
-                                type="file" 
-                                accept="image/png, image/jpeg, image/jpg" 
-                                onChange={(event) => handleFileChange(event, setImage)} 
-                            />
-                            Choose file
+                              <input type="file" onChange={(event) => handleFileChange(event, setImage)} />
+                              Choose file
                             </label>
-
                             {image && (
                               <>
                                 <img src={URL.createObjectURL(image)} alt={`${category} preview`} style={{ width: "100%", height: "auto", marginTop: "10px" }} />
