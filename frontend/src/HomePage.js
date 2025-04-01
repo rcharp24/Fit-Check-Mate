@@ -19,11 +19,11 @@ const HomePage = () => {
       </Row>
 
       {/* Main Content */}
-      <Container fluid className="home-page-container vh-100 d-flex flex-column justify-content-center align-items-center checkered-background">
+      <Container fluid className="home-page-container vh-100 d-flex flex-column justify-content-center align-items-center checkered-background overflow-auto">
         {/* Title Section */}
         <Card className="shadow-lg text-center mb-4" style={{ width: '40%', backgroundColor: 'rgba(10, 10, 40, 0.9)', color: 'white' }}>
             <Card.Body>
-              <h1 className="display-4 main-title" style={{ fontFamily: "'Allura', cursive" }}>Fit Check Mate</h1>
+              <h1 className="main-title" style={{ fontFamily: "'Dancing Script', cursive", fontSize: "4rem" }}>Fit Check Mate</h1>
           
               <p className="lead mb-0">Ready to check your outfit fit?</p>
             </Card.Body>
@@ -44,9 +44,9 @@ const HomePage = () => {
           <Col md={4} className="mb-4">
             <Card className="shadow-lg h-100">
               <Card.Body className="d-flex flex-column">
-                <h5 className="card-title">Match Suggestions</h5>
-                <p className="card-text flex-grow-1">Not matching? Get recommendations to improve your look.</p>
-                <Button variant="warning" onClick={() => navigate('/suggestions')} className="w-100 mt-auto">See Matches</Button>
+                <h5 className="card-title">Saved Colors</h5>
+                <p className="card-text flex-grow-1">Forgot what colors you saved? Click here to see your previously saved looks.</p>
+                <Button variant="warning" onClick={() => navigate('/savedcolors')} className="w-100 mt-auto">See Matches</Button>
               </Card.Body>
             </Card>
           </Col>

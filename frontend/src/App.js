@@ -12,6 +12,7 @@ import ResultPage from "./ResultPage";
 import AboutPage from "./AboutPage";
 import Logout from "./Logout";
 import NavBarComponent from "./NavBarComponent";
+import SavedColors from "./SavedColors";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -46,6 +47,7 @@ function App() {
                   <Route path="/upload" element={<UploadPage />} />
                   <Route path="/results" element={<ResultPage />} />
                   <Route path="/about" element={<AboutPage />} />
+                  <Route path="/savedcolors" element={<SavedColors />} />
                 </Routes>
               </NavBarComponent>
             }

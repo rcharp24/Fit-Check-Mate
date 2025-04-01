@@ -43,7 +43,7 @@ const RegisterPage = () => {
 
 
   return (
-    <Container fluid className="vh-100 d-flex justify-content-center align-items-center bg-dark checkered-background">
+    <Container fluid className="vh-100 d-flex justify-content-center align-items-center bg-dark checkered-background overflow-auto">
       <Row className="w-100 justify-content-center">
         <Col md={5} lg={4}>
           <Card className="shadow-lg text-white" style={{ backgroundColor: 'rgba(10, 10, 40, 0.9)' }}>

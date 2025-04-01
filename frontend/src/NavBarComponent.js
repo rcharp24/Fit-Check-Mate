@@ -19,10 +19,9 @@ const NavBarComponent = ({ children }) => {
         style={{
           width: "120px",
           height: "120px",
-          position: "fixed",
+          position: "absolute",
           top: "20px",
-          left: "20px",
-          zIndex: 1000, // Ensures it stays above other content
+          left: "20px"
         }}
       />
       

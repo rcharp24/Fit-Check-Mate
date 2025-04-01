@@ -149,6 +149,12 @@ function UploadPage() {
       // Navigate to the results page and pass the extracted colors
       navigate('/results', { state: { extractedColors: matchedColors } });
 
+      const userId = "test_user_123"; // Replace with actual user ID from authentication
+    await axios.post("http://127.0.0.1:5000/api/save-colors", {
+      userId,
+      extractedColors: matchedColors
+    });
+
     } catch (error) {
       console.error("Analysis Error:", error);
       setError("Analysis failed. Please try again.");
@@ -165,11 +171,15 @@ function UploadPage() {
           <div className="d-flex justify-content-center gap-3">
             <Link to="/about"><Button variant="primary">About</Button></Link>
             <Link to="/home"><Button variant="primary">Home</Button></Link>
+            <Link to="/savedcolors"><Button variant="primary">Saved Colors</Button></Link>
             <Link to="/logout"><Button variant="primary">Logout</Button></Link>
           </div>
         </nav>
       </Row>
-      <Container fluid className="vh-100 d-flex flex-column justify-content-center align-items-center">   
+      <Container fluid className="vh-100 d-flex flex-column justify-content-center align-items-center">
+      <Card className="shadow-lg text-center mb-4" style={{ width: '30%', backgroundColor: 'rgba(10, 10, 40, 0.9)', color: 'white'}}>
+          <h2 style={{ fontFamily: "'Dancing Script', cursive", fontSize: "3rem" }}>Upload Pictures</h2>
+        </Card> 
         <Row className="w-100 justify-content-center">
           <Col md={6} lg={5}>
             <Card className="shadow-lg text-white" style={{ backgroundColor: "rgba(10, 10, 40, 0.9)" }}>
