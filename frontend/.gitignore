@@ -24,3 +24,4 @@ yarn-error.log*
 
 # Ignore the upload folder
 /upload/
+/node_modules/
