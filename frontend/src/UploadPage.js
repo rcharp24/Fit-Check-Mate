@@ -7,7 +7,7 @@ function UploadPage() {
   const [topImage, setTopImage] = useState(null);
   const [bottomImage, setBottomImage] = useState(null);
   const [shoeImage, setShoeImage] = useState(null);
-  const [extractedColors, setExtractedColors] = useState({});
+  const [setExtractedColors] = useState({});
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
