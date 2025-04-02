@@ -4,7 +4,6 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "install": "npm install --build-from-source",
     "start": "node server.js"
   },
   "keywords": [],
