@@ -8,7 +8,7 @@ app.use(express.json());
 
 // ✅ PostgreSQL Database Connection
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, // Render will provide this
+  connectionString: process.env.postgresql://fit_check_mate_db_user:yo5jFj5Ut2cndzpnH3iG80F3mgSKY7nD@dpg-cvmqdua4d50c73aodt3g-a.virginia-postgres.render.com/fit_check_mate_db, // Render will provide this
   ssl: {
     rejectUnauthorized: false, // Required for Render-hosted PostgreSQL
   },
