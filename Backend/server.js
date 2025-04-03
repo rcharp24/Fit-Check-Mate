@@ -2,7 +2,7 @@ const express = require("express");
 const { Pool } = require("pg");
 const cors = require("cors");
 const multer = require("multer");
-const path = require("path");
+require('dotenv').config();
 const Jimp = require("jimp"); // Jimp for image processing (use other libraries if needed)
 
 const app = express();
@@ -27,9 +27,15 @@ const createTableQuery = `
   )
 `;
 
-pool.query(createTableQuery)
-  .then(() => console.log("✅ PostgreSQL connected and table ensured"))
-  .catch((err) => console.error("❌ Error creating table:", err.message));
+// Check the tables in the database
+pool.query("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'")
+  .then((res) => {
+    console.log("Tables in the database:", res.rows);
+  })
+  .catch((err) => {
+    console.error("Error listing tables:", err);
+  });
+
 
 // ✅ Setup Multer for image uploads
 const storage = multer.memoryStorage(); // Store images in memory
