@@ -15,7 +15,7 @@ function ResultsPage() {
     }
   
     try {
-      const response = await fetch("https://fit-check-mate-uxwr.onrender.com/api/save-colors**", {
+      const response = await fetch("https://fit-check-mate-uxwr.onrender.com/api/save-colors", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ extractedColors }),

@@ -6,14 +6,14 @@ function SavedColors() {
   const [savedColors, setSavedColors] = useState([]);
 
   useEffect(() => {
-    fetch("**YOUR_RENDER_BACKEND_URL/api/saved-colors**")
+    fetch("https://fit-check-mate-uxwr.onrender.com/api/saved-colors")
       .then((response) => response.json())
       .then((data) => setSavedColors(data))
       .catch((error) => console.error("Error fetching saved colors:", error));
   }, []);
   
   const handleDeleteColor = (id) => {
-    fetch(`https://fit-check-mate-uxwr.onrender.com/api/delete-color/${id}**`, { method: "DELETE" })
+    fetch(`https://fit-check-mate-uxwr.onrender.com/api/delete-color/${id}`, { method: "DELETE" })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to delete color");
