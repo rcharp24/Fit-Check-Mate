@@ -1,6 +1,9 @@
 const express = require("express");
 const { Pool } = require("pg");
 const cors = require("cors");
+const multer = require("multer");
+const path = require("path");
+const Jimp = require("jimp"); // Jimp for image processing (use other libraries if needed)
 
 const app = express();
 app.use(cors());
@@ -27,6 +30,10 @@ const createTableQuery = `
 pool.query(createTableQuery)
   .then(() => console.log("✅ PostgreSQL connected and table ensured"))
   .catch((err) => console.error("❌ Error creating table:", err.message));
+
+// ✅ Setup Multer for image uploads
+const storage = multer.memoryStorage(); // Store images in memory
+const upload = multer({ storage: storage });
 
 // ✅ API to Get Saved Colors
 app.get("/api/saved-colors", async (req, res) => {
@@ -59,21 +66,41 @@ app.post("/api/save-color", async (req, res) => {
   }
 });
 
-// ✅ API to Delete a Color
-app.delete("/api/delete-color/:id", async (req, res) => {
-  const colorId = req.params.id;
-
+// ✅ API to Analyze Images and Extract Colors (NEW)
+app.post("/api/analyze", upload.fields([{ name: "topImage" }, { name: "bottomImage" }, { name: "shoeImage" }]), async (req, res) => {
   try {
-    const result = await pool.query("DELETE FROM colors WHERE id = $1 RETURNING id", [colorId]);
-
-    if (result.rowCount === 0) {
-      return res.status(404).json({ error: "Color not found" });
+    if (!req.files || !req.files["topImage"] || !req.files["bottomImage"] || !req.files["shoeImage"]) {
+      return res.status(400).json({ error: "Missing image files" });
     }
 
-    res.json({ message: "Color deleted successfully!", deletedId: colorId });
-  } catch (err) {
-    console.error("❌ Error deleting color:", err.message);
-    res.status(500).json({ error: err.message });
+    // Process the uploaded images
+    const topImage = req.files["topImage"][0].buffer;
+    const bottomImage = req.files["bottomImage"][0].buffer;
+    const shoeImage = req.files["shoeImage"][0].buffer;
+
+    // Extract colors (example: using Jimp to get dominant color)
+    const extractColor = async (imageBuffer) => {
+      const image = await Jimp.read(imageBuffer);
+      const color = image.getPixelColor(image.bitmap.width / 2, image.bitmap.height / 2); // Grab color from center pixel
+      const hexColor = Jimp.intToRGBA(color);
+      return `#${hexColor.r.toString(16).padStart(2, '0')}${hexColor.g.toString(16).padStart(2, '0')}${hexColor.b.toString(16).padStart(2, '0')}`;
+    };
+
+    const topColor = await extractColor(topImage);
+    const bottomColor = await extractColor(bottomImage);
+    const shoeColor = await extractColor(shoeImage);
+
+    // Prepare the extracted colors
+    const extractedColors = {
+      top: topColor,
+      bottom: bottomColor,
+      shoes: shoeColor,
+    };
+
+    res.json(extractedColors);
+  } catch (error) {
+    console.error("❌ Error analyzing images:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
