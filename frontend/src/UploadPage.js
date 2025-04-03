@@ -43,7 +43,7 @@ function UploadPage() {
     formData.append("shoeImage", shoeImage);
 
     try {
-      const response = await axios.post('${process.env.REACT_APP_API_URL}/api/analyze', formData, {
+      const response = await axios.post('https://fit-check-mate-uxwr.onrender.com/api/analyze', formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

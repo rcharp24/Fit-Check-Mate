@@ -1,9 +1,11 @@
+import Jimp from 'jimp';
 const express = require("express");
 const { Pool } = require("pg");
 const cors = require("cors");
 const multer = require("multer");
 require('dotenv').config();
-const Jimp = require("jimp"); // Jimp for image processing (use other libraries if needed)
+
+ // Jimp for image processing (use other libraries if needed)
 
 const app = express();
 app.use(cors());
