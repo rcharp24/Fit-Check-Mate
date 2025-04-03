@@ -8,46 +8,29 @@ function ResultsPage() {
   const [showNotification, setShowNotification] = useState(false);
 
   // Function to save colors to the database
-  const handleSaveColors = () => {
+  const handleSaveColors = async () => {
     if (!extractedColors) {
       alert("No colors to save!");
       return;
     }
-
-    let savedCount = 0; // Track saved colors count
-    const totalItems = Object.keys(extractedColors).length;
-
-    Object.keys(extractedColors).forEach((item) => {
-      const colorData = {
-        item_name: item,
-        extracted_color: extractedColors[item]?.extracted,
-        match_color: extractedColors[item]?.matchHex,
-      };
-
-      fetch("http://localhost:5000/api/save-color", {
+  
+    try {
+      const response = await fetch("https://fit-check-mate-uxwr.onrender.com/api/save-colors**", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(colorData),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Failed to save color");
-          }
-          return response.json();
-        })
-        .then(() => {
-          savedCount++;
-
-          // Show notification only when all colors are saved
-          if (savedCount === totalItems) {
-            setShowNotification(true);
-          }
-        })
-        .catch((error) => console.error("Error saving colors:", error));
-    });
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ extractedColors }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to save colors");
+      }
+  
+      setShowNotification(true); // Show success notification
+    } catch (error) {
+      console.error("Error saving colors:", error);
+    }
   };
+  
 
   return (
     <div className="overflow-auto">

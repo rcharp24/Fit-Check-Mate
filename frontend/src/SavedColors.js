@@ -6,28 +6,26 @@ function SavedColors() {
   const [savedColors, setSavedColors] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/saved-colors")
+    fetch("**YOUR_RENDER_BACKEND_URL/api/saved-colors**")
       .then((response) => response.json())
       .then((data) => setSavedColors(data))
       .catch((error) => console.error("Error fetching saved colors:", error));
   }, []);
-
+  
   const handleDeleteColor = (id) => {
-    console.log("Attempting to delete color with ID:", id);
-
-    fetch(`http://localhost:5000/api/delete-color/${id}`, { method: "DELETE" })
+    fetch(`https://fit-check-mate-uxwr.onrender.com/api/delete-color/${id}**`, { method: "DELETE" })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to delete color");
         }
         return response.json();
       })
-      .then((data) => {
-        console.log("Delete response:", data);
+      .then(() => {
         setSavedColors((prevColors) => prevColors.filter((color) => color.id !== id));
       })
       .catch((error) => console.error("Error deleting color:", error));
   };
+  
 
   return (
     <div className="bg-dark text-white checkered-background overflow-auto">
