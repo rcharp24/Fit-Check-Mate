@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Card, Button, Alert } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Alert, Spinner } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -14,10 +14,15 @@ function UploadPage() {
   const handleFileChange = (event, setImage) => {
     const file = event.target.files[0];
     const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+    const maxSize = 5 * 1024 * 1024; // 5MB
 
     if (file) {
       if (!allowedTypes.includes(file.type)) {
         setError("Invalid file type. Please upload a JPG, JPEG, or PNG image.");
+        return;
+      }
+      if (file.size > maxSize) {
+        setError("File size too large. Please upload an image smaller than 5MB.");
         return;
       }
       setError(""); // Clear error if the file is valid
@@ -110,7 +115,7 @@ function UploadPage() {
                   </Row>
                   <div className="text-center mt-4">
                     <Button type="submit" className="btn-warning" disabled={loading || !topImage || !bottomImage || !shoeImage}>
-                      {loading ? "Analyzing..." : "Analyze"}
+                      {loading ? <Spinner animation="border" size="sm" /> : "Analyze"}
                     </Button>
                   </div>
                 </form>
